@@ -74,7 +74,8 @@ export class PlayComponent implements OnInit {
         this.result = { letter, answer: false },
         setTimeout(() => {
           let payArray = [...this.pay[this.settings.questionsNumber]];
-          this.openGameOverDialog({type: 'lose', sum: payArray.reverse()[this.numberOfActualQuestion-1]});
+          let sum = this.numberOfActualQuestion == 1 ? 0 : payArray.reverse()[this.numberOfActualQuestion-2];
+          this.openGameOverDialog({type: 'lose', sum});
           this.submitted = false;
           this.fifty = [];
           this.result = { letter: '', answer: false };
