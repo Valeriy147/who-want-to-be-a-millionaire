@@ -1,0 +1,24 @@
+<div class="logo">
+  <img src="assets/img/logo.svg" alt="">
+</div>
+<div *ngIf="questions" class="question row">
+  <div class="question__text col-md-12">
+    <div>{{questions[numberOfActualQuestion-1].question}}</div>
+  </div>
+  <div class="answers row">
+    <div [ngClass]="{'hidden': fifty.includes('a')}" class="col-md-6">
+      <div (click)="checkAnswer('a')" [ngClass]="{ 'right': result.letter == 'a' && result.answer == true, 'wrong': result.letter == 'a' && result.answer == false}">A :  {{questions[numberOfActualQuestion-1].a}}</div>
+    </div>
+    <div [ngClass]="{'hidden': fifty.includes('b')}" class="col-md-6">
+      <div (click)="checkAnswer('b')" [ngClass]="{ 'right': result.letter == 'b' && result.answer == true, 'wrong': result.letter == 'b' && result.answer == false}">B :  {{questions[numberOfActualQuestion-1].b}}</div>
+    </div>
+    <div [ngClass]="{'hidden': fifty.includes('c')}" class="col-md-6">
+      <div (click)="checkAnswer('c')" [ngClass]="{ 'right': result.letter == 'c' && result.answer == true, 'wrong': result.letter == 'c' && result.answer == false}">C :  {{questions[numberOfActualQuestion-1].c}}</div>
+    </div>
+    <div [ngClass]="{'hidden': fifty.includes('d')}" class="col-md-6">
+      <div (click)="checkAnswer('d')" [ngClass]="{ 'right': result.letter == 'd' && result.answer == true, 'wrong': result.letter == 'd' && result.answer == false}">D :  {{questions[numberOfActualQuestion-1].d}}</div>
+    </div>
+  </div>
+</div>
+<app-results-table></app-results-table>
+<app-hints (useHelpHint)="useHelpHint()" (useFiftyHint)="useFiftyHint()"></app-hints>

@@ -1,0 +1,8 @@
+<div *ngIf="settings | async as settings" class="hints row">
+  <div class="col-md-6">
+    <button [disabled]="!settings.fiftyFifty || hintsService.fiftyUsed" (click)="useFifty()">50/50</button>
+  </div>
+  <div class="col-md-6">
+    <button [disabled]="!settings.help || hintsService.helpUsed" (click)="useHelp()">Домога залу</button>
+  </div>
+</div>

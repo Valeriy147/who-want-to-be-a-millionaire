@@ -1,0 +1,20 @@
+.header {
+  margin: 15px 30px;
+
+  >div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >img {
+      width: 50px;
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,0 +1,11 @@
+<h1 *ngIf="data.type == 'win'; else lose" mat-dialog-title>Вітаю, ви виграли</h1>
+<ng-template #lose>
+  <h1 mat-dialog-title>Гра закінчена</h1>
+</ng-template>
+<div mat-dialog-content>
+  Ваш виграш: {{data.sum | currency:'USD':'symbol':'0.0-0'}}
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="newGame()">Нова гра</button>
+  <button mat-button mat-dialog-close (click)="startOver()">Почати спочатку</button>
+</div>

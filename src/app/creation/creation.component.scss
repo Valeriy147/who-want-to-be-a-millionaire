@@ -1,0 +1,118 @@
+.creation {
+  padding: 30px 50px;
+}
+
+form {
+  .question-container {
+    margin: 20px;
+  }
+
+  textarea {
+      display: block;
+      margin: 20px;
+      padding: 20px;
+      width: 700px;
+      max-width: 100%;
+      border-radius: 24px;
+      border: none;
+      height: 150px;
+      overflow-y: hidden;
+    }
+
+  .answer-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .answer-label {
+    margin-right: 10px;
+  }
+
+  .answer-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    input {
+      display: block;
+      margin: 0;
+      padding: 10px;
+      width: 700px;
+      max-width: 80%;
+      border-radius: 12px;
+      border: none;
+      height: 50px;
+    }
+  }
+
+
+
+  .correct-answer-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    height: 50px;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .correct-answer-button:hover {
+    background-color: #0056b3;
+  }
+
+  button {
+      margin: 20px;
+      padding: 20px;
+  }
+}
+
+
+.trueAnswer {
+  background-color: #c0fad8;
+  transition: background-color 1s ease;
+}
+
+.falseAnswer {
+  background-color: #facbc5;
+  transition: background-color 1s ease;
+}
+
+.falseAnswerButton {
+  background-color: #81bcfa !important;
+  transition: background-color 1s ease;
+}
+
+.checkbox-text {
+  color: white;
+}
+
+.mdc-checkbox {
+  border-color: white !important;
+  background-color: white !important;
+}
+
+.settings {
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+}
+
+.settings__bonuses {
+  margin: 20px;
+
+  >input {
+    cursor: pointer;
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  >label{
+    cursor: pointer;
+  }
+}

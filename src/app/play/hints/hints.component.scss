@@ -1,0 +1,23 @@
+.hints {
+  position:absolute;
+  top: 100px;
+  right: 70%;
+  width: 300px;
+
+  button {
+    border-radius: 50%;
+    border: none;
+    width: 100px;
+    height: 100px;
+    background-color: #20a3fa;
+    color: white;
+
+    &:hover {
+      background-color: #00ccff;
+    }
+    &[disabled] {
+      background-color: #005f77;
+      opacity: 0.6;
+    }
+  }
+}

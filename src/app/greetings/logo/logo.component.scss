@@ -1,0 +1,20 @@
+.logo-container {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: slideIn 1.5s ease forwards;
+  width: 200px;
+  >img {
+    width: 100%;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 25%;
+  }
+}
