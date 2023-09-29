@@ -33,7 +33,7 @@ export const DefaultQuestions = [{
 ]
 
 export const DefaultSettings = {
-  questionsNumber: 16,
+  questionsNumber: 4,
   fiftyFifty: true,
   help: true,
 }
