@@ -13,8 +13,8 @@
 
         <div class="results-options col-md-3 col-4">
           <div (click)="toggleResults()">
-            <span>{{(pay![settings.questionsNumber][pay![settings.questionsNumber].length - numberOfActualQuestion + 1] || 0) | currency:'USD':'symbol':'0.0-0' }}</span>
-            <mat-icon>arrow_right_alt</mat-icon>
+            <span class="results-options__prev-sum">{{(pay![settings.questionsNumber][pay![settings.questionsNumber].length - numberOfActualQuestion + 1] || 0) | currency:'USD':'symbol':'0.0-0' }}</span>
+            <mat-icon class="results-options__arrow-right">arrow_right_alt</mat-icon>
             <span>{{pay![settings.questionsNumber][pay![settings.questionsNumber].length - numberOfActualQuestion] | currency:'USD':'symbol':'0.0-0'}}</span>
             <mat-icon *ngIf="!showResults">keyboard_arrow_down</mat-icon>
             <mat-icon *ngIf="showResults">keyboard_arrow_up</mat-icon>

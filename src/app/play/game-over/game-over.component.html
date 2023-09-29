@@ -2,6 +2,7 @@
 <ng-template #lose>
   <h1 mat-dialog-title>Гра закінчена</h1>
 </ng-template>
+<div class="answer" mat-dialog-content *ngIf="data.type == 'lose'">Правильна відповідь: {{data.answer}}</div>
 <div mat-dialog-content>
   Ваш виграш: {{data.sum | currency:'USD':'symbol':'0.0-0'}}
 </div>

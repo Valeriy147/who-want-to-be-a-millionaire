@@ -150,7 +150,28 @@
   visibility: hidden;
 }
 
+@media(max-width: 1200px) {
+  .results-options {
+
+    >div {
+
+      >span {
+        font-size: 14px;
+      }
+
+    }
+  }
+  .results-options__prev-sum {
+    display: none;
+  }
+
+  .results-options__arrow-right {
+    display: none;
+  }
+}
+
 @media(max-width: 768px){
+
   .logo {
 
     >img {

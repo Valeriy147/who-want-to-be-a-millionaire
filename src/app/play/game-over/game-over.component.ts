@@ -24,7 +24,9 @@ export class GameOverComponent {
     private store: Store,
     private router: Router,
     private hintsService: HintsService,
-  ) {}
+  ) {
+    console.log(data)
+  }
 
   public newGame(): void {
     this.store.dispatch(newGame());
