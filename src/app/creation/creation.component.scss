@@ -15,7 +15,8 @@ form {
       max-width: 100%;
       border-radius: 24px;
       border: none;
-      height: 150px;
+      min-height: 150px;
+      max-height: 150px;
       overflow-y: hidden;
     }
 
@@ -32,9 +33,8 @@ form {
   .answer-group {
     display: flex;
     align-items: center;
-    position: relative;
 
-    input {
+    >input {
       display: block;
       margin: 0;
       padding: 10px;
@@ -46,8 +46,6 @@ form {
     }
   }
 
-
-
   .correct-answer-button {
     background-color: #007bff;
     color: #fff;
@@ -56,7 +54,7 @@ form {
     padding: 8px 16px;
     height: 50px;
     font-size: 14px;
-    margin-right: 10px;
+    margin: 20px 10px 20px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
@@ -64,13 +62,7 @@ form {
   .correct-answer-button:hover {
     background-color: #0056b3;
   }
-
-  button {
-      margin: 20px;
-      padding: 20px;
-  }
 }
-
 
 .trueAnswer {
   background-color: #c0fad8;
@@ -100,19 +92,92 @@ form {
   display: flex;
   margin-left: 20px;
   align-items: center;
+
+  .settings__bonuses {
+    margin: 20px;
+
+    >input {
+      cursor: pointer;
+      margin: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    >label{
+      cursor: pointer;
+    }
+  }
 }
 
-.settings__bonuses {
-  margin: 20px;
 
-  >input {
-    cursor: pointer;
-    margin: 10px;
-    width: 20px;
-    height: 20px;
+
+.submit-button {
+  &[disabled]{
+    background-color: rgb(204, 202, 202);
+    opacity: 0.5;
+  }
+}
+
+@media(max-width: 900px) {
+  .answer-group {
+
+    width: 100%;
+    >input{
+      width: 80%;
+    }
+  }
+}
+
+@media(max-width: 660px) {
+  .settings__bonuses {
+    display: block !important;
+
+    >input {
+      cursor: pointer;
+      margin: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    >label{
+      cursor: pointer;
+    }
   }
 
-  >label{
-    cursor: pointer;
+  .answer-group {
+    .correct-answer-button {
+      margin: 10px;
+      width: 70px;
+      font-size: 12px;
+      padding: 5px;
+    }
+  }
+
+  .creation {
+    padding: 30px 30px;
+  }
+}
+
+
+@media(max-width: 620px) {
+  .settings {
+    display: block;
+    margin-left: 20px;
+    align-items: center;
+
+    .settings__bonuses {
+      margin: 10px;
+
+      >input {
+        cursor: pointer;
+        margin: 10px;
+        width: 20px;
+        height: 20px;
+      }
+
+      >label{
+        cursor: pointer;
+      }
+    }
   }
 }

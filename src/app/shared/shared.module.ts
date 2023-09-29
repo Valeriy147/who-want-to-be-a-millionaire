@@ -11,6 +11,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -27,6 +29,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCheckboxModule,
     MatTooltipModule,
     MatDialogModule,
+    MatMenuModule,
+    MatIconModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -40,6 +44,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCheckboxModule,
     MatTooltipModule,
     MatDialogModule,
+    MatMenuModule,
+    MatIconModule
   ]
 })
 export class SharedModule { }

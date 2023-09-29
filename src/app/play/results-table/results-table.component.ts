@@ -1,11 +1,12 @@
-import { PAY } from './../constances/pay.constance';
-import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+
 import { Store } from '@ngrx/store';
-import { Component, Input, inject } from '@angular/core';
-import { GameFeature } from 'src/app/store/game.reducer';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { IPieOptions, ISettings } from 'src/app/interfaces/settings.interfaces';
+import { Observable } from 'rxjs';
+
+import { GameFeature } from '../../store/game.reducer';
+import { SharedModule } from '../../shared/shared.module';
+import { IPayOptions, ISettings } from '../../interfaces/settings.interfaces';
 
 @Component({
   standalone: true,
@@ -15,8 +16,8 @@ import { IPieOptions, ISettings } from 'src/app/interfaces/settings.interfaces';
   imports: [SharedModule, CommonModule],
 })
 export class ResultsTableComponent {
-  private store = inject(Store)
-  public actualStep = this.store.select(GameFeature.selectNumberOfActualQuestion)
-  public settings: Observable<ISettings> = this.store.select(GameFeature.selectSettings)
-  public pay: IPieOptions = PAY;
+  private _store = inject(Store)
+  public actualStep = this._store.select(GameFeature.selectNumberOfActualQuestion)
+  public settings: Observable<ISettings> = this._store.select(GameFeature.selectSettings)
+  public pay$: Observable<IPayOptions | null> = this._store.select(GameFeature.selectPayData);
 }

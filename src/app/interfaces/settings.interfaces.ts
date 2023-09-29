@@ -4,6 +4,6 @@ export interface ISettings {
   help: boolean,
 }
 
-export interface IPieOptions {
+export interface IPayOptions {
   [key: number]: number[];
 }

@@ -1,11 +1,16 @@
-import { startOver } from './../../store/game.actions';
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { newGame } from 'src/app/store/game.actions';
 import { Router } from '@angular/router';
-import { HintsService } from 'src/app/shared/services/hints.service';
+import { Component, inject } from '@angular/core';
+
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { SharedModule } from '../../shared/shared.module';
+import { newGame } from '../../store/game.actions';
+import { HintsService } from '../../shared/services/hints.service';
+import { GameFeature } from '../../store/game.reducer';
+import { IQuestion } from '../../interfaces/question.interface';
+import { startOver } from '../../store/game.actions';
 
 @Component({
   standalone: true,
@@ -16,12 +21,13 @@ import { HintsService } from 'src/app/shared/services/hints.service';
 
 })
 export class HeaderComponent {
-  private store = inject(Store)
-  private router = inject(Router);
-  private hintsService = inject(HintsService);
+  private store: Store = inject(Store)
+  private router: Router = inject(Router);
+  private hintsService: HintsService = inject(HintsService);
 
+  public questions$: Observable<IQuestion[]> = this.store.select(GameFeature.selectQuestions);
   public newGame(): void {
-    this.store.dispatch(newGame())
+    this.store.dispatch(newGame());
     this.router.navigate(['/creation']);
   }
 
@@ -31,8 +37,8 @@ export class HeaderComponent {
     this.hintsService.resetData();
   }
 
-  public out() {
-    this.store.dispatch(newGame())
+  public out(): void {
+    this.store.dispatch(newGame());
     this.router.navigate(['/greetings']);
   }
 }

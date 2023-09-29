@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SharedModule } from 'src/app/shared/shared.module';
 
-interface HelpDialogData {
-  answer: string;
-}
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { HelpDialogData } from '../../interfaces/modal-data.interfaces';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   standalone: true,

@@ -1,23 +1,21 @@
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { newGame, startOver } from 'src/app/store/game.actions';
-import { HintsService } from 'src/app/shared/services/hints.service';
+import { Router } from '@angular/router';
 
-export interface GameOverDialogData {
-  type: 'win' | 'lose';
-  sum: number;
-}
+import { Store } from '@ngrx/store';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { SharedModule } from '../../shared/shared.module';
+import { newGame, startOver } from '../../store/game.actions';
+import { HintsService } from '../../shared/services/hints.service';
+import { GameOverDialogData } from '../../interfaces/modal-data.interfaces';
 
 @Component({
   standalone: true,
   selector: 'app-game-over',
   templateUrl: './game-over.component.html',
   styleUrls: ['./game-over.component.scss'],
-  imports: [CommonModule, SharedModule],
+  imports: [ CommonModule, SharedModule ],
 })
 export class GameOverComponent {
 
@@ -28,12 +26,12 @@ export class GameOverComponent {
     private hintsService: HintsService,
   ) {}
 
-  public newGame() {
+  public newGame(): void {
     this.store.dispatch(newGame());
     this.router.navigate(['/creation']);
   }
 
-  public startOver() {
+  public startOver(): void {
     this.store.dispatch(startOver());
     this.router.navigate(['/play']);
     this.hintsService.resetData();

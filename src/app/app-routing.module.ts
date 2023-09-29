@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: '/greetings', pathMatch: 'full' },
+
   {
     path: 'greetings',
     loadComponent: () =>
@@ -10,6 +11,7 @@ const routes: Routes = [
       (module) => module.GreetingsComponent,
     ),
   },
+
   {
     path: 'creation',
     loadComponent: () =>
@@ -17,6 +19,7 @@ const routes: Routes = [
       (module) => module.CreationComponent,
     ),
   },
+
   {
     path: 'play',
     loadComponent: () =>

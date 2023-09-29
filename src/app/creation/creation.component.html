@@ -1,4 +1,5 @@
-<div class="creation" [@fadeIn]="'in'">
+<div *ngIf="numbers$ | async as numbers" class="creation" [@fadeIn]="'in'">
+
   <form [formGroup]="settingsForm" class="settings">
     <mat-form-field >
       <mat-label>Кількість питань</mat-label>
@@ -13,53 +14,40 @@
       <label for="fifty">50/50</label>
     </div>
     <div class="settings__bonuses">
-      <input id="help" type="checkbox" formControlName="help" matTooltip="У гравця буде одна можливість дізнатись думку залу">
+      <input id="help" type="checkbox" formControlName="help" matTooltip="У гравця буде одна можливість дізнатись думку друга">
       <label for="help">Допомога залу</label>
     </div>
   </form>
+
   <form [formGroup]="questionsForm" (ngSubmit)="onSubmit()">
     <div formArrayName="questions">
       <ng-container *ngFor="let question of questions.controls; let i = index">
         <div [formGroupName]="i">
           Питання {{i + 1}}.
           <textarea formControlName="question" placeholder="Запитання" maxlength="300"></textarea>
-          <div class="answer-wrapper">
-            <label class="answer-label">A:</label>
+          <div *ngFor="let l of ['a', 'b', 'c', 'd']" class="answer-wrapper">
+            <label class="answer-label">{{l.toUpperCase()}}:</label>
             <div class="answer-group">
               <input
-                [ngClass]="{ trueAnswer: checkValue(question, 'a') === 'trueValue', falseAnswer : checkValue(question, 'a') === 'falseValue' }"
-                formControlName="a"
-                placeholder="Відповідь A"
+                [ngClass]="{ trueAnswer: checkValue(question, l) === 'trueValue', falseAnswer : checkValue(question, l) === 'falseValue' }"
+                [formControlName]="l"
+                placeholder="Відповідь {{l.toUpperCase()}}"
                 maxlength="70">
-              <button type="button" [ngClass]="{ falseAnswerButton : checkValue(question, 'a') === 'falseValue' }" (click)="chooseCorrectAnswer(i, 'a')" class="correct-answer-button">Правильна</button>
-            </div>
-          </div>
-          <div class="answer-wrapper">
-            <label class="answer-label">B:</label>
-            <div class="answer-group">
-              <input [ngClass]="{ trueAnswer: checkValue(question, 'b') === 'trueValue', falseAnswer : checkValue(question, 'b') === 'falseValue' }" formControlName="b" placeholder="Відповідь B" maxlength="70">
-              <button type="button" [ngClass]="{ falseAnswerButton : checkValue(question, 'b') === 'falseValue' }" (click)="chooseCorrectAnswer(i, 'b')" class="correct-answer-button">Правильна</button>
-            </div>
-          </div>
-          <div class="answer-wrapper">
-            <label class="answer-label">C:</label>
-            <div class="answer-group">
-              <input [ngClass]="{ trueAnswer: checkValue(question, 'c') === 'trueValue', falseAnswer : checkValue(question, 'c') === 'falseValue' }" formControlName="c" placeholder="Відповідь C" maxlength="70">
-              <button type="button" [ngClass]="{ falseAnswerButton : checkValue(question, 'c') === 'falseValue' }" (click)="chooseCorrectAnswer(i, 'c')" class="correct-answer-button">Правильна</button>
-            </div>
-          </div>
-          <div class="answer-wrapper">
-            <label class="answer-label">D:</label>
-            <div class="answer-group">
-              <input [ngClass]="{ trueAnswer: checkValue(question, 'd') === 'trueValue', falseAnswer : checkValue(question, 'd') === 'falseValue' }" formControlName="d" placeholder="Відповідь D" maxlength="70">
-              <button type="button" [ngClass]="{ falseAnswerButton : checkValue(question, 'd') === 'falseValue' }" (click)="chooseCorrectAnswer(i, 'd')" class="correct-answer-button">Правильна</button>
+              <button
+                type="button"
+                [ngClass]="{ falseAnswerButton : checkValue(question, l) === 'falseValue' }"
+                (click)="chooseCorrectAnswer(i, l)"
+                class="correct-answer-button">
+                Правильна
+              </button>
             </div>
           </div>
         </div>
       </ng-container>
     </div>
-    <button [disabled]="questionsForm.invalid" mat-raised-button type="submit">Підтвердити</button>
+    <button class="submit-button" [disabled]="questionsForm.invalid" mat-raised-button type="submit">Підтвердити</button>
   </form>
+
 </div>
 
 

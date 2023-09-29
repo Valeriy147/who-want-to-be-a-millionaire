@@ -1,7 +1,18 @@
 <ng-container *ngIf="settings | async as settings">
-  <div *ngIf="actualStep | async as step" class="results" [ngClass]="{ 'medium-length': settings.questionsNumber === 12, 'long-length' :  settings.questionsNumber === 16, 'very-long-length' :  settings.questionsNumber === 20}">
-    <div *ngFor="let payItem of pay[settings.questionsNumber]; let i = index" class="results__item" [ngClass]="{ 'actual': pay[settings.questionsNumber].length - i == step, 'done': pay[settings.questionsNumber].length - i < step}">
+  <div
+    *ngIf="actualStep | async as step"
+    class="results"
+    [ngClass]="{
+      'medium-length': settings.questionsNumber === 12,
+      'long-length' :  settings.questionsNumber === 16,
+      'very-long-length' :  settings.questionsNumber === 20}">
+    <ng-container *ngIf="pay$ | async as pay">
+      <div
+      *ngFor="let payItem of pay[settings.questionsNumber]; let i = index"
+      class="results__item"
+      [ngClass]="{ 'actual': pay[settings.questionsNumber].length - i == step, 'done': pay[settings.questionsNumber].length - i < step}">
       {{payItem | currency:'USD':'symbol':'0.0-0'}}
     </div>
+    </ng-container>
   </div>
 </ng-container>

@@ -1,8 +1,9 @@
 <div class="header row">
-  <div class="col-md-2"><img src="assets/img/logo.svg" alt=""></div>
-  <div class="offset-md-6 col-md-4 button-container">
+  <div class="offset-md-6 offset-sm-2 col-md-6 col-sm-8 button-container">
     <div><button mat-raised-button color="primary" (click)="newGame()">Нова гра</button></div>
-    <div><button mat-raised-button color="primary" (click)="startOver()">Почати спочатку</button></div>
+    <ng-container *ngIf="questions$ | async as questions">
+      <div><button [disabled]="!questions.length" mat-raised-button color="primary" (click)="startOver()">Почати спочатку</button></div>
+    </ng-container>
     <div><button mat-raised-button color="primary" (click)="out()">Вийти</button></div>
   </div>
 </div>

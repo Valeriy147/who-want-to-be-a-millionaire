@@ -1,50 +1,17 @@
 import { createReducer, on, createFeature } from '@ngrx/store';
 
 import { IGameState } from './game.state.interfaces';
-import { setQuestions, setActualQuestion, setGameSettings, nextStep, newGame, startOver } from './game.actions';
+import { setQuestions, setActualQuestion, setGameSettings, nextStep, newGame, startOver, getNumbersOfQuestions, getNumbersOfQuestionsSuccess, getNumbersOfQuestionsFailed, getPayData, getPayDataSuccess, getPayDataFailed } from './game.actions';
+import { DefaultQuestions, DefaultSettings } from './constance';
 
 export const products = 'products';
 
 export const productsInitialState: IGameState = {
-  questions: [{
-    question: '11',
-    a: '1',
-    b: '1',
-    c: '1',
-    d: '1',
-    answer: 'a'
-  },
-  {
-    question: '22',
-    a: '2',
-    b: '2',
-    c: '2',
-    d: '2',
-    answer: 'b'
-  },
-  {
-    question: '33',
-    a: '3',
-    b: '3',
-    c: '3',
-    d: '3',
-    answer: 'c'
-  },
-  {
-    question: '44',
-    a: '4',
-    b: '4',
-    c: '4',
-    d: '4',
-    answer: 'd'
-  }
-],
-  numberOfActualQuestion : 1,
-  settings: {
-    questionsNumber: 4,
-    fiftyFifty: true,
-    help: true,
-  },
+  questions: DefaultQuestions,
+  numberOfActualQuestion: 1,
+  settings: DefaultSettings,
+  numbersOfQuestions: null,
+  payData: null,
 };
 
 export const GameFeature = createFeature({
@@ -76,16 +43,50 @@ export const GameFeature = createFeature({
       ...state,
       questions: [],
       numberOfActualQuestion : 1,
-      settings: {
-        questionsNumber: 4,
-        fiftyFifty: false,
-        help: false,
-      },
+      settings: DefaultSettings,
     })),
 
     on(startOver, (state: IGameState) => ({
       ...state,
       numberOfActualQuestion : 1,
+    })),
+
+    on(getNumbersOfQuestions, (state: IGameState) => ({
+      ...state,
+      loading: true,
+      error: null,
+    })),
+
+    on(getNumbersOfQuestionsSuccess, (state: IGameState, { numbers }) => ({
+      ...state,
+      loading: false,
+      error: null,
+      numbersOfQuestions: numbers,
+    })),
+
+    on(getNumbersOfQuestionsFailed, (state: IGameState, { error }) => ({
+      ...state,
+      loading: false,
+      error,
+    })),
+
+    on(getPayData, (state: IGameState) => ({
+      ...state,
+      loading: true,
+      error: null,
+    })),
+
+    on(getPayDataSuccess, (state: IGameState, { pay }) => ({
+      ...state,
+      loading: false,
+      error: null,
+      payData: pay,
+    })),
+
+    on(getPayDataFailed, (state: IGameState, { error }) => ({
+      ...state,
+      loading: false,
+      error,
     })),
   ),
 });

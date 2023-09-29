@@ -1,6 +1,6 @@
-import { IPieOptions } from "src/app/interfaces/settings.interfaces";
+import { IPayOptions } from "src/app/interfaces/settings.interfaces";
 
-export const PAY: IPieOptions = {
+export const PAY: IPayOptions = {
   4: [1000000, 100000, 10000, 1000],
   6: [1000000, 500000, 250000, 100000, 10000, 1000],
   8: [1000000, 750000, 500000, 250000, 100000, 50000, 10000, 1000],
