@@ -6,4 +6,6 @@ export interface IGameState {
   settings: ISettings,
   numbersOfQuestions: number[] | null,
   payData: IPayOptions | null,
+  loading: boolean,
+  error: string | null,
 }

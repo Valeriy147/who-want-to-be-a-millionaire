@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, delay } from 'rxjs';
 import { IPayOptions } from 'src/app/interfaces/settings.interfaces';
 import { PAY } from '../constances/pay.constance';
-import { NUMBERS_OF_QUESTIONS } from 'src/app/creation/creation.constance';
+import { NUMBERS_OF_QUESTIONS } from 'src/app/creation/constances/creation.constance';
 
 
 @Injectable({

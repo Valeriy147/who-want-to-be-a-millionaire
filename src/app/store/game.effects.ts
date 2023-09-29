@@ -66,7 +66,6 @@ export const handleGetNumbersOfQuestionsSuccess$ = createEffect(
     actions$.pipe(
       ofType(getNumbersOfQuestionsSuccess),
       tap(() => responseHandlerService.response({ type: 'success', content: `Дані отримано` })),
-      tap(() => router.navigate(['complete']))
     ),
 
   { functional: true, dispatch: false },
@@ -94,7 +93,6 @@ export const handleGetPayDataSuccess$ = createEffect(
     actions$.pipe(
       ofType(getPayDataSuccess),
       tap(() => responseHandlerService.response({ type: 'success', content: `Дані отримано` })),
-      tap(() => router.navigate(['complete']))
     ),
 
   { functional: true, dispatch: false },

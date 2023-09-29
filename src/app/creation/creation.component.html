@@ -1,53 +1,71 @@
-<div *ngIf="numbers$ | async as numbers" class="creation" [@fadeIn]="'in'">
+<ng-container *ngIf="!(isLoading$ | async); else loading">
+  <div *ngIf="numbers$ | async as numbers" class="creation" [@fadeIn]="'in'">
 
-  <form [formGroup]="settingsForm" class="settings">
-    <mat-form-field >
-      <mat-label>Кількість питань</mat-label>
-      <mat-select formControlName="questionsNumber"  name="questionsNumber" (selectionChange)="changeNumberOfQuestions()">
-        <mat-option *ngFor="let number of numbers" [value]="number">
-          {{number}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div class="settings__bonuses">
-      <input id="fifty" type="checkbox" formControlName="fiftyFifty" matTooltip="У гравця буде одна можливість прибрати дві неправильні відповіді">
-      <label for="fifty">50/50</label>
-    </div>
-    <div class="settings__bonuses">
-      <input id="help" type="checkbox" formControlName="help" matTooltip="У гравця буде одна можливість дізнатись думку друга">
-      <label for="help">Допомога залу</label>
-    </div>
-  </form>
+    <form [formGroup]="settingsForm" class="settings">
+      <mat-form-field >
+        <mat-label>Кількість питань</mat-label>
+        <mat-select formControlName="questionsNumber"  name="questionsNumber" (selectionChange)="changeNumberOfQuestions()">
+          <mat-option *ngFor="let number of numbers" [value]="number">
+            {{number}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="settings__bonuses">
+        <input id="fifty" type="checkbox" formControlName="fiftyFifty" matTooltip="У гравця буде одна можливість прибрати дві неправильні відповіді">
+        <label for="fifty">50/50</label>
+      </div>
+      <div class="settings__bonuses">
+        <input id="help" type="checkbox" formControlName="help" matTooltip="У гравця буде одна можливість дізнатись думку друга">
+        <label for="help">Допомога залу</label>
+      </div>
+    </form>
 
-  <form [formGroup]="questionsForm" (ngSubmit)="onSubmit()">
-    <div formArrayName="questions">
-      <ng-container *ngFor="let question of questions.controls; let i = index">
-        <div [formGroupName]="i">
-          Питання {{i + 1}}.
-          <textarea formControlName="question" placeholder="Запитання" maxlength="300"></textarea>
-          <div *ngFor="let l of ['a', 'b', 'c', 'd']" class="answer-wrapper">
-            <label class="answer-label">{{l.toUpperCase()}}:</label>
-            <div class="answer-group">
-              <input
-                [ngClass]="{ trueAnswer: checkValue(question, l) === 'trueValue', falseAnswer : checkValue(question, l) === 'falseValue' }"
-                [formControlName]="l"
-                placeholder="Відповідь {{l.toUpperCase()}}"
-                maxlength="70">
-              <button
-                type="button"
-                [ngClass]="{ falseAnswerButton : checkValue(question, l) === 'falseValue' }"
-                (click)="chooseCorrectAnswer(i, l)"
-                class="correct-answer-button">
-                Правильна
-              </button>
+    <div class="game-mode">
+      <button
+        class="left"
+        [disabled]="!randomQuestions"
+        (click)="randomQuestions = false"
+        matTooltip="Створіть питання власноруч">
+        Створити питання</button>
+      <button
+        class="right"
+        [disabled]="randomQuestions"
+        (click)="randomQuestions = true"
+        matTooltip="Питання будуть сгенеровані автоматично">
+        Сгенерувати автоматично</button>
+    </div>
+
+    <form [formGroup]="questionsForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="!randomQuestions" formArrayName="questions">
+        <ng-container *ngFor="let question of questions.controls; let i = index">
+          <div [formGroupName]="i">
+            Питання {{i + 1}}.
+            <textarea formControlName="question" placeholder="Запитання" maxlength="300"></textarea>
+            <div *ngFor="let l of ['a', 'b', 'c', 'd']" class="answer-wrapper">
+              <label class="answer-label">{{l.toUpperCase()}}:</label>
+              <div class="answer-group">
+                <input
+                  [ngClass]="{ trueAnswer: checkValue(question, l) === 'trueValue', falseAnswer : checkValue(question, l) === 'falseValue' }"
+                  [formControlName]="l"
+                  placeholder="Відповідь {{l.toUpperCase()}}"
+                  maxlength="70">
+                <button
+                  type="button"
+                  [ngClass]="{ falseAnswerButton : checkValue(question, l) === 'falseValue' }"
+                  (click)="chooseCorrectAnswer(i, l)"
+                  class="correct-answer-button">
+                  Правильна
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </ng-container>
-    </div>
-    <button class="submit-button" [disabled]="questionsForm.invalid" mat-raised-button type="submit">Підтвердити</button>
-  </form>
-
-</div>
-
+        </ng-container>
+      </div>
+      <button class="submit-button" [disabled]="questionsForm.invalid && !randomQuestions" mat-raised-button type="submit">Підтвердити</button>
+    </form>
+  </div>
+</ng-container>
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
 

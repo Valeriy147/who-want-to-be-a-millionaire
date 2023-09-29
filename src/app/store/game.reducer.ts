@@ -12,6 +12,8 @@ export const productsInitialState: IGameState = {
   settings: DefaultSettings,
   numbersOfQuestions: null,
   payData: null,
+  loading: false,
+  error: null,
 };
 
 export const GameFeature = createFeature({

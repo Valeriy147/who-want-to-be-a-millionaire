@@ -2,6 +2,24 @@
   padding: 30px 50px;
 }
 
+.game-mode {
+  margin: 20px 0;
+
+  >button {
+    width: 300px;
+    border: none;
+    padding: 10px;
+    &.right {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+    &.left {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+  }
+}
+
 form {
   .question-container {
     margin: 20px;
@@ -126,6 +144,15 @@ form {
       width: 80%;
     }
   }
+
+  .game-mode {
+
+    width: 100%;
+
+    >button {
+      width: 50%;
+    }
+  }
 }
 
 @media(max-width: 660px) {
@@ -178,6 +205,13 @@ form {
       >label{
         cursor: pointer;
       }
+    }
+  }
+
+  .game-mode {
+
+    >button {
+      font-size: 12px;
     }
   }
 }

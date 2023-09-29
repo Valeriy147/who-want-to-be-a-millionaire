@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { getNumbersOfQuestions, setGameSettings, setQuestions } from '../store/game.actions';
 import { fade } from '../shared/animations/fadeanumation';
 import { GameFeature } from '../store/game.reducer';
+import { getRandomQuestions } from '../shared/functions/questions-generation.function';
 
 @Component({
   standalone: true,
@@ -28,6 +29,9 @@ export class CreationComponent implements OnInit {
   public questionsForm!: FormGroup;
   public settingsForm!: FormGroup;
   public numbers$: Observable<number[] | null> = this._store.select(GameFeature.selectNumbersOfQuestions);
+  public isLoading$: Observable<boolean> = this._store.select(GameFeature.selectLoading);
+  public error$: Observable<string | null> = this._store.select(GameFeature.selectError);
+  public randomQuestions: boolean = false;
 
   public ngOnInit(): void {
     this._store.dispatch(getNumbersOfQuestions())
@@ -68,12 +72,20 @@ export class CreationComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if( this.questionsForm.invalid){
+    if( this.questionsForm.invalid && !this.randomQuestions){
       return;
     }
-    this._store.dispatch(setQuestions({ questions: this.questions.value }));
-    this._store.dispatch(setGameSettings({ settings: this.settingsForm.value}));
-    this._router.navigate(['/play']);
+
+    if (!this.randomQuestions) {
+      this._store.dispatch(setQuestions({ questions: this.questions.value }));
+      this._store.dispatch(setGameSettings({ settings: this.settingsForm.value}));
+      this._router.navigate(['/play']);
+    } else {
+      this._store.dispatch(setQuestions({ questions: getRandomQuestions(this.settingsForm.value.questionsNumber) }));
+      this._store.dispatch(setGameSettings({ settings: this.settingsForm.value}));
+      this._router.navigate(['/play']);
+    }
+
   }
 
   public changeNumberOfQuestions(): void{

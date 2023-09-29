@@ -41,8 +41,8 @@ export class PlayComponent implements OnInit {
   public submitted: boolean = false;
   public fifty: string[] = [];
   public noQuestions: boolean = false;
-
-
+  public isLoading$: Observable<boolean> = this._store.select(GameFeature.selectLoading);
+  public error$: Observable<string | null> = this._store.select(GameFeature.selectError);
 
   ngOnInit(): void {
     this._store.dispatch(getPayData());
